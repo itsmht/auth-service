@@ -43,7 +43,7 @@ class RegistrationController extends Controller
         $ip = $req->ip();
         $token = Str::random(16);
         $deviceID = $req->deviceID;
-        $deviceName = $req->device_name;
+        $deviceName = $req->deviceName;
         try
         {   
             //Account Creation
