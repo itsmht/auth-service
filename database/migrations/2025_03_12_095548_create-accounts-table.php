@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->bigIncrements('account_id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('oneID')->unique();
             $table->string('role');
             $table->string('home_ip')->nullable();
