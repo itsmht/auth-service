@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('oneID')->unique();
             $table->string('role');
+            $table->string('gender')->nullable();
+            $table->string('media')->nullable();
+            $table->string('image_path')->nullable();
             $table->string('home_ip')->nullable();
             $table->string('home_deviceID')->nullable();
             $table->string('home_device_name')->nullable();
