@@ -42,16 +42,18 @@ class RegistrationController extends Controller
         $oneID = Str::random(6);
         $ip = $req->ip();
         $token = Str::random(16);
+        $deviceID = $req->deviceID;
+        $deviceName = $req->device_name;
         try
         {   
-            //Account creation
-            $account->name = $req->name;
+            //Account Creation
             $account = new Account();
+            $account->name = $req->name;
             $account->oneID = $oneID;
             $account->role = "non-subscribed";
             $account->home_ip = $ip;
-            $account->home_deviceID = $req->deviceID;
-            $account->home_device_name = $req->device_name;
+            $account->home_deviceID = $deviceID;
+            $account->home_device_name = $deviceName;
             $account->status = "A";
             $account->dob = $req->dob;
             $account->save();
@@ -60,7 +62,6 @@ class RegistrationController extends Controller
             $account_credentials->email = $req->email;
             $account_credentials->password = bcrypt($req->password);
             $account_credentials->account_id = $account->account_id;
-            $account_credentials->status = "A";
             $account_credentials->save();
             //Token generation
             $account_token = new Token();
@@ -74,8 +75,8 @@ class RegistrationController extends Controller
             $account_tracking = new Track();
             $account_tracking->account_id = $account->account_id;
             $account_tracking->ip_address = $ip;
-            $account_tracking->deviceID = $req->deviceID;
-            $account_tracking->device_name = $req->device_name;
+            $account_tracking->deviceID = $deviceID;
+            $account_tracking->device_name = $deviceName;
             $account_tracking->status = "A";
             $account_tracking->last_login = date('Y-m-d H:i:s');
             $account_tracking->last_logout = null;
