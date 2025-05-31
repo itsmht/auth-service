@@ -39,7 +39,7 @@ class VerificationController extends Controller
             $otp_db->status = "N";
             $otp_db->purpose = "V";
             $otp_db->save();
-            return response()->json(['code'=>'200','message'=>'Verification OTP sent to email.','data'=>['otp'=>$otp]], 200);
+            return response()->json(['code'=>'200','message'=>'Verification OTP sent to email.','data'=>null], 200);
         }
         catch (\Exception $e)
         {
