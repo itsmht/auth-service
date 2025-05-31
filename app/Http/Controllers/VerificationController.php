@@ -74,7 +74,7 @@ class VerificationController extends Controller
                 {
                     $otp_db->status = "V";
                     $otp_db->save();
-                    return response()->json(['code'=>'200','message'=>'OTP verified successfully.'], 200);
+                    return response()->json(['code'=>'200','message'=>'OTP verified successfully.','data'=>null], 200);
                 }
                 else
                 {
