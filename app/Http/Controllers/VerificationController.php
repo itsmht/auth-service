@@ -78,12 +78,12 @@ class VerificationController extends Controller
                 }
                 else
                 {
-                    return response()->json(['code'=>'400','message'=>'OTP already used or expired.'], 400);
+                    return response()->json(['code'=>'400','message'=>'OTP already used or expired.','data'=>null], 400);
                 }
             }
             else
             {
-                return response()->json(['code'=>'400','message'=>'Invalid OTP.'], 400);
+                return response()->json(['code'=>'400','message'=>'Invalid OTP.','data'=>null], 400);
             }
         }
         catch (\Exception $e)
