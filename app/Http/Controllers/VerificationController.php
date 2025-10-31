@@ -41,10 +41,10 @@ class VerificationController extends Controller
 
                 if ($existing) {
                     return response()->json([
-                        'code' => '200',
+                        'code' => '409',
                         'message' => 'This email is already verified and user registration was successful.',
                         'data' => null
-                    ], 200);
+                    ], 409); // Conflict with existing verified email
                 }
 
                 // Otherwise, create a new OTP entry
