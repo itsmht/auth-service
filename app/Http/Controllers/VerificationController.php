@@ -33,19 +33,43 @@ class VerificationController extends Controller
         $otp = "00000"; // For testing purpose only
         $email = $req->email;
         try
-        {
-            $otp_db = new VerificationOTP();
-            $otp_db->email = $email;
-            $otp_db->otp = $otp;
-            $otp_db->status = "N";
-            $otp_db->purpose = "V";
-            $otp_db->save();
-            return response()->json(['code'=>'200','message'=>'Verification OTP sent to email.','data'=>null], 200);
-        }
-        catch (\Exception $e)
-        {
-            return response()->json(['code'=>'500','message'=>'Internal server error.','data'=>$e], 500);
-        }
+            {
+                // Check if the email already exists with status = 'V'
+                $existing = VerificationOTP::where('email', $email)
+                                        ->where('status', 'V')
+                                        ->first();
+
+                if ($existing) {
+                    return response()->json([
+                        'code' => '200',
+                        'message' => 'This email is already verified and user registration was successful.',
+                        'data' => null
+                    ], 200);
+                }
+
+                // Otherwise, create a new OTP entry
+                $otp_db = new VerificationOTP();
+                $otp_db->email = $email;
+                $otp_db->otp = $otp;
+                $otp_db->status = "N";
+                $otp_db->purpose = "V";
+                $otp_db->save();
+
+                return response()->json([
+                    'code' => '200',
+                    'message' => 'Verification OTP sent to email.',
+                    'data' => null
+                ], 200);
+            }
+            catch (\Exception $e)
+            {
+                return response()->json([
+                    'code' => '500',
+                    'message' => 'Internal server error.',
+                    'data' => $e->getMessage()
+                ], 500);
+            }
+
     }
     function verifyOTP(Request $req)
     {
