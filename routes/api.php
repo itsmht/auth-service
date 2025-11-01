@@ -20,3 +20,6 @@ Route::post('updateAccount', [RegistrationController::class, 'updateAccount']);
 Route::post('genreSelection', [RegistrationController::class, 'genreSelection']);
 Route::post('verifyEmail', [VerificationController::class, 'verifyEmail']);
 Route::post('verifyOTP', [VerificationController::class, 'verifyOTP']);
+
+//Helper routes
+Route::post('account_name', [\App\Http\Controllers\HelperController::class, 'account_name']);
