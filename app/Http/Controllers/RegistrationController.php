@@ -54,6 +54,10 @@ class RegistrationController extends Controller
             $account->home_ip = $ip;
             $account->home_deviceID = $deviceID;
             $account->home_device_name = $deviceName;
+            $account->profession = $req->profession;
+            $account->phone = $req->phone;
+            $account->education = $req->education;
+            $account->address = $req->address;
             $account->status = "A";
             $account->dob = $req->dob;
             $account->save();
