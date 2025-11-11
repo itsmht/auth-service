@@ -36,5 +36,29 @@ class HelperController extends Controller
         'data' => $accounts
     ], 200);
 }
+function validateToken(Request $req)
+{
+    $token = $req->header('Authorization');
+    try
+    {
+        $token_db = \App\Models\Token::where('token', $token)->where('status', 'N')->first();
+        if (!$token_db)
+        {
+            return response()->json(['code'=>'401','message'=>'Invalid token.','data'=>null], 401);
+        }
+        $account = \App\Models\Account::where('account_id', $token_db->account_id)->first();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Token is valid.',
+            'data' => [
+                'account_id' => $account->account_id,
+            ]
+        ], 200);
+    }
+    catch (\Exception $e)
+    {
+        return response()->json(['code'=>'500','message'=>'Server error.','data'=>null], 500);
+    }
+}
 
 }
