@@ -23,3 +23,6 @@ Route::post('verifyOTP', [VerificationController::class, 'verifyOTP']);
 
 //Helper routes
 Route::post('account_name', [\App\Http\Controllers\HelperController::class, 'account_name']);
+
+//Account routes
+Route::get('myProfile', [\App\Http\Controllers\AccountController::class, 'myProfile']);
