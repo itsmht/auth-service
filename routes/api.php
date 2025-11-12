@@ -24,6 +24,7 @@ Route::post('verifyOTP', [VerificationController::class, 'verifyOTP']);
 //Helper routes
 Route::post('account_name', [\App\Http\Controllers\HelperController::class, 'account_name']);
 Route::get('validateToken', [\App\Http\Controllers\HelperController::class, 'validateToken']);
+Route::get('instructors', [\App\Http\Controllers\HelperController::class, 'instructors']);
 
 //Account routes
 Route::get('myProfile', [\App\Http\Controllers\AccountController::class, 'myProfile']);

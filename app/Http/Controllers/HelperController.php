@@ -60,5 +60,17 @@ function validateToken(Request $req)
         return response()->json(['code'=>'500','message'=>'Server error.','data'=>null], 500);
     }
 }
+function instructors()
+{
+    $instructors = \App\Models\Account::where('role', 'instructor')
+        ->select('account_id', 'name')
+        ->get();
+
+    return response()->json([
+        'code' => 200,
+        'message' => 'Instructors retrieved successfully.',
+        'data' => $instructors
+    ], 200);
+}
 
 }
