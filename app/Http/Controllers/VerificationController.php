@@ -7,6 +7,7 @@ use App\Models\Credential;
 use App\Models\VerificationOTP;
 use App\Models\Track;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use File;
 use Datetime;
