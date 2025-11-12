@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\SendOtpMail;
 use App\Models\Account;
 use App\Models\Credential;
 use App\Models\VerificationOTP;
@@ -29,8 +30,8 @@ class VerificationController extends Controller
             return response()->json(['code'=>'401','message'=>'Validation error.','data'=>$validator->errors()], 401);
         }
         //$token = Str::random(16);
-        //$otp = rand(100000, 999999);
-        $otp = "00000"; // For testing purpose only
+        $otp = random_int(100000, 999999);
+        //$otp = "00000"; // For testing purpose only
         $email = $req->email;
         try
             {
@@ -54,6 +55,12 @@ class VerificationController extends Controller
                 $otp_db->status = "N";
                 $otp_db->purpose = "V";
                 $otp_db->save();
+
+                // --- ADD THIS SECTION ---
+                // Now, send the email using the Mailable we created
+                // Pass the generated $otp to the Mailable's constructor
+                Mail::to($email)->send(new SendOtpMail($otp));
+                // -------------------------
 
                 return response()->json([
                     'code' => '200',
