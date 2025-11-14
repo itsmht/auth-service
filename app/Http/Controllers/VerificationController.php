@@ -31,7 +31,7 @@ class VerificationController extends Controller
             return response()->json(['code'=>'401','message'=>'Validation error.','data'=>$validator->errors()], 401);
         }
         //$token = Str::random(16);
-        $otp = random_int(100000, 999999);
+        $otp = random_int(10000, 99999);
         //$otp = "00000"; // For testing purpose only
         $email = $req->email;
         try
